@@ -1,0 +1,139 @@
+body {
+    background-color: lightgrey;
+    left: 1.5em;
+    position: relative;
+    max-width: 905px;
+}
+
+.List1 li {
+    display: inline;
+    font-family: "ORF ON", Arial, Helvetica, Lucida Sans Unicode, Lucida Grande, sans-serif;
+    color: white;
+    max-height: 15px;
+    position: relative;
+}
+
+.List1 {
+    background-color: rgb(143, 0, 0);
+    padding: 7px;
+    word-spacing: 2.8em;
+    font-size: 14px;
+}
+
+.List1Topright {
+    font-family: "ORF ON", Arial, Helvetica, Lucida Sans Unicode, Lucida Grande, sans-serif;
+    font-feature-settings: "liga", "kern";
+    color: white;
+    text-align: right;
+    position: relative;
+    right: 19px;
+    top: -20px;
+    font-size: 13px;
+}
+
+.List2 {
+    background-color: rgb(216, 2, 2);
+    padding: 25px;
+    font-family: "ORF ON", Arial, Helvetica, Lucida Sans Unicode, Lucida Grande, sans-serif;
+    color: white;
+    font-size: 25px;
+    position: relative;
+    top: -12px;
+    height: 29px;
+}
+
+.ORFBild {
+    width: 100px;
+    height: 40px;
+    position: relative;
+    top: 12px;
+}
+
+.Vorarlberg {
+    position: relative;
+    top: -10px;
+}
+
+.Spaltesmall {
+    background-color: #fd2727;
+    height: 9px;
+    position: relative;
+    top: -12px;
+}
+
+.nav2 {
+    height: 35px;
+    font-family: "ORF ON", Arial, Helvetica, Lucida Sans Unicode, Lucida Grande, sans-serif;
+    color: white;
+    position: relative;
+    background-color: rgb(161, 0, 0);
+    top: -12px;
+    height: 27px;
+}
+
+.nav2- li {
+    display: inline;
+    list-style-type: none;
+    padding: 25px;
+    position: relative;
+    top: 6px;
+}
+
+.Glocke {
+    position: relative;
+    text-align: right;
+    left: -15px;
+    top: -9px;
+}
+
+.Bild {
+    width: 905px;
+}
+
+.Text {
+    background-color: white;
+    position: relative;
+    padding: 20px;
+    margin-left: 6em;
+    margin-right: 6em;
+    height: 200px;
+    top: -80px;
+    z-index: 1;
+}
+
+.Überschrift {
+    color: rgb(105, 105, 105);
+    font-family: "ORF ON", Arial, Helvetica, Lucida Sans Unicode, Lucida Grande, sans-serif;
+    position: relative;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.Title {
+    position: relative;
+    top: 30px;
+    font-family: "ORF ON", Arial, Helvetica, Lucida Sans Unicode, Lucida Grande, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.Text1 {
+    position: relative;
+    top: 50px;
+    font-family: "ORF ON", Arial, Helvetica, Lucida Sans Unicode, Lucida Grande, sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.Datum {
+    position: relative;
+    top: 70px;
+    font-family: "ORF ON", Arial, Helvetica, Lucida Sans Unicode, Lucida Grande, sans-serif;
+}
+
+.WhiteBackround {
+    position: relative;
+    background-color: white;
+    height: 500px;
+    top: -15em;
+}

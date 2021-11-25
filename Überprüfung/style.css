@@ -1,0 +1,49 @@
+.gelb {
+    height: 150px;
+    width: initial;
+    background-color: yellow;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.green {
+    height: 50px;
+    width: 50px;
+    background-color: lightgreen;
+    margin: 50px;
+}
+
+.list {
+    height: 300px;
+    width: 400px;
+    background-color: lightblue;
+    position: relative;
+    margin: 20px;
+}
+
+.orange {
+    display: flex;
+    height: 100px;
+    width: 100px;
+    background-color: orange;
+    bottom: 0px;
+    right: 0px;
+    position: absolute;
+}
+
+.lila {
+    width: 50px;
+    height: 50px;
+    background-color: purple;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    
+}
+
+.H1 {
+    position: relative;
+    top: 20px;
+    left: 20px;
+}

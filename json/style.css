@@ -1,0 +1,19 @@
+.container {
+    background-color: lightgreen;
+    position: relative;
+    display: flexbox;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.main ul{
+    list-style-type: none;
+}
+.sideinfo {
+    list-style-type: none;
+    font-size: 15px;
+}
+
+.Bild {
+    margin: 20px;
+}

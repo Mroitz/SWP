@@ -1,0 +1,26 @@
+.upper{
+    height: 70vh;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Kodaki_fuji_frm_shojinko.jpg/1200px-Kodaki_fuji_frm_shojinko.jpg");
+    display: flex;
+    padding: 50px;
+    justify-content: space-between;
+}
+
+*{
+    margin: 0;
+}
+
+.under{
+    display: flex;
+    padding: 10px;
+    text-align: justify;
+    margin: 10px;
+}
+
+.text{
+    padding: 20px;
+}
+
+.img{
+    height: 100px;
+}

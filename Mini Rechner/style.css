@@ -1,0 +1,28 @@
+.Addition {
+    padding: 5px;
+
+}
+
+.Subtraktion {
+    padding: 5px;
+
+}
+
+.Multiplikation {
+    padding: 5px;
+
+}
+
+.Division {
+    padding: 5px;
+
+}
+
+.add {
+    border-style: dashed;
+    position: relative;
+    display: flex;
+    top: 0px;
+    right: 1400px;
+    
+}

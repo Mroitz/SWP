@@ -1,0 +1,78 @@
+.red {
+    background-color: red;
+    width: 400px;
+    position: relative;
+    text-align: center;
+    height: 125px;
+    font-size: 30px;
+    top: -23px;
+    font-weight: bold;
+}
+
+.orangeblue {
+    display: flex;
+    position: relative;
+    top: -12px;
+}
+
+.orange {
+    background-color: orange;
+    width: 400px;
+    height: 200px;
+    position: relative;
+    text-align: center;
+}
+
+.blue {
+    background-color: blue;
+    width: 400px;
+    height: 200px;
+    text-align: center;
+}
+
+.Liste1 ul {
+    position: relative;
+    font-weight: bold;
+    font-size: 20px;
+    left: -45px
+}
+
+.Liste1 li {
+    position: relative;
+    left: 30px;
+}
+
+.Liste2 ul {
+    position: relative;
+    left: -45px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Liste2 li {
+    position: relative;
+    display: inline;
+    margin: 2px;
+    color: white;
+    background-color: darkred;
+    padding: bottom;
+    padding-right: 55px;
+    padding-bottom: 20px;
+    left: 45px;
+}
+
+.Liste2 li:hover {
+    background-color: black;
+}
+
+.Absolut {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-color: black;
+    color: white;
+    margin-top: 20px;
+    margin-right: 20px;
+    right: 0px;
+    top: 0px;
+}
