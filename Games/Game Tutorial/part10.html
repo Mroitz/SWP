@@ -16,8 +16,8 @@
 
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1536,
+    height: 750,
     physics: {
         default: 'arcade',
         arcade: {
@@ -45,7 +45,7 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('sky', 'assets/sky.png');
+    this.load.image('sky', 'assets/sky.jpg');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
     this.load.image('bomb', 'assets/bomb.png');
@@ -55,14 +55,16 @@ function preload ()
 function create ()
 {
     //  A simple background for our game
-    this.add.image(400, 300, 'sky');
+    this.add.image(400, 270, 'sky');
+    this.add.image(1200, 270, 'sky');
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = this.physics.add.staticGroup();
 
     //  Here we create the ground.
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(-250, 568, 'ground').setScale(4).refreshBody();
+    platforms.create(670, 568, 'ground').setScale(8).refreshBody();
 
     //  Now let's create some ledges
     platforms.create(600, 400, 'ground');
@@ -110,7 +112,7 @@ function create ()
     stars.children.iterate(function (child) {
 
         //  Give each star a slightly different bounce
-        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+        child.setBounceY(Phaser.Math.FloatBetween(1, 0.5));
 
     });
 
