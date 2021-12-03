@@ -44,6 +44,8 @@
         var score = 0;
         var gameOver = false;
         var scoreText;
+        var particles;
+        var ermitter;
 
         var game = new Phaser.Game(config);
 
@@ -55,6 +57,7 @@
             this.load.image('bomb', 'assets/bomb.png');
             this.load.image('lava', 'assets/lava.png');
             this.load.image('lava2', 'assets/lava.png');
+            this.load.image('particles', 'assets/particles.png');
             this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
         }
 
@@ -78,9 +81,9 @@
             //  Now let's create some ledges
             platforms.create(600, 400, 'ground').setScale(0.3).refreshBody();
             platforms.create(50, 250, 'ground').setScale(0.3).refreshBody();
-            platforms.create(750, 220, 'ground').setScale(0.3).refreshBody();
+            platforms.create(750, 220, 'ground2').setScale(0.3).refreshBody();
             platforms.create(1250, 320, 'ground').setScale(0.3).refreshBody();
-            platforms.create(1050, 420, 'ground2').setScale(0.3).refreshBody();
+            platforms.create(1380, 150, 'ground2').setScale(0.3).refreshBody();
             lava2.create(768, 900, 'lava2').setScale(2.3).refreshBody();
             lava.create(768, 810, 'lava').setScale(2.3).refreshBody();
 
@@ -89,7 +92,7 @@
             player = this.physics.add.sprite(100, 450, 'dude');
 
             //  Player physics properties. Give the little guy a slight bounce.
-            player.setBounce(0.2);
+            player.setBounce(0.1);
             player.setCollideWorldBounds(true);
 
             //  Our player animations, turning, walking left and walking right.
@@ -152,6 +155,7 @@
         function update() {
             if (gameOver) {
                 gameoverscreen();
+
             }
 
             if (cursors.left.isDown) {
@@ -176,10 +180,13 @@
         }
 
         function collectStar(player, star) {
-            star.disableBody(true, true);
+            star.setVelocityY(-350);
+            setTimeout(function collectStar() {
+                star.disableBody(true, true);
+            }, 250);
 
             //  Add and update the score
-            score += 10;
+            score += 2/3;
             scoreText.setText('Score: ' + score);
 
             if (stars.countActive(true) === 0) {
@@ -230,7 +237,7 @@
             document.addEventListener("keyup", function (event) {
                 if (event.keyCode === 13) {
                     location.reload();
-                
+
                 }
             });
 
