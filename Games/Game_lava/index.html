@@ -180,13 +180,13 @@
         }
 
         function collectStar(player, star) {
-            star.setVelocityY(-350);
             setTimeout(function collectStar() {
                 star.disableBody(true, true);
-            }, 250);
+            }, 550);
+            star.setVelocityY(-350);
 
             //  Add and update the score
-            score += 2/3;
+            score += 1;
             scoreText.setText('Score: ' + score);
 
             if (stars.countActive(true) === 0) {
@@ -206,6 +206,7 @@
                 bomb.allowGravity = false;
 
             }
+
         }
 
         function hitBomb(player, bomb) {
