@@ -5,19 +5,19 @@
     <meta charset="UTF-8" />
     <title>Making your first Phaser 3 Game - Part 10</title>
 
-<!doctype html>
-<html lang="en">
+    <!doctype html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Making your first Phaser 3 Game - Part 10</title>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Making your first Phaser 3 Game - Part 10</title>
+        <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+        <style type="text/css">
+            body {
+                margin: 0;
+            }
+        </style>
+    </head>
 
 <body>
 
@@ -25,7 +25,7 @@
         var config = {
             type: Phaser.AUTO,
             width: 1536,
-            height: 750,
+            height: 765,
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -65,11 +65,12 @@
             this.load.image('bomb', 'assets/bomb.png');
             this.load.image('lava', 'assets/lava.png');
             this.load.image('lava2', 'assets/lava.png');
+            this.load.image('spikes', 'assets/spikes1.png');
             this.load.image('pressenter', 'assets/pressenter.png');
             this.load.image('gameover', 'assets/gameover.png');
-            this.load.spritesheet('dude', 'assets/dude.png', {
-                frameWidth: 32,
-                frameHeight: 48
+            this.load.spritesheet('dude', 'assets/sans1.png', {
+                frameWidth: 38.5,
+                frameHeight: 50
             });
         }
 
@@ -97,9 +98,10 @@
             platforms.create(1250, 320, 'ground').setScale(0.3).refreshBody();
             platforms.create(1380, 150, 'ground2').setScale(0.3).refreshBody();
             lava2.create(768, 870, 'lava2').setScale(2.3).refreshBody();
-            lava.create(968, 780, 'lava').setScale(2).refreshBody();
-            lava.create(-368, 780, 'lava').setScale(2).refreshBody();
-
+            lava.create(658, 690, 'lava').setScale(1).refreshBody();
+            lava.create(1326, 690, 'lava').setScale(1).refreshBody();
+            lava.create(-10, 690, 'lava').setScale(1).refreshBody();
+            lava2.create(768, 532, 'spikes').setScale(1.5).refreshBody();
 
             // The player and its settings
             player = this.physics.add.sprite(100, 450, 'dude');
@@ -115,7 +117,7 @@
                     start: 0,
                     end: 3
                 }),
-                frameRate: 10,
+                frameRate: 5,
                 repeat: -1
             });
 
@@ -125,7 +127,7 @@
                     key: 'dude',
                     frame: 4
                 }],
-                frameRate: 20
+                frameRate: 5
             });
 
             this.anims.create({
@@ -134,7 +136,7 @@
                     start: 5,
                     end: 8
                 }),
-                frameRate: 10,
+                frameRate: 5,
                 repeat: -1
             });
 
@@ -152,7 +154,7 @@
                 }
             });
 
-            stars.children.iterate(function(child) {
+            stars.children.iterate(function (child) {
 
                 //  Give each star a slightly different bounce
                 child.setBounceY(Phaser.Math.FloatBetween(0.5, 0.1));
@@ -218,13 +220,21 @@
 
             if (stars.countActive(true) === 0) {
                 //  A new batch of stars to collect
-                stars.children.iterate(function(child) {
+                stars.children.iterate(function (child) {
 
                     child.enableBody(true, child.x, 0, true, true);
 
                 });
 
-                var x = (player.x < 80) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+                var x = (player.x < 80) ? Phaser.Math.Between(300, 600) : Phaser.Math.Between(0, 400);
+
+                var bomb = bombs.create(x, 100, 'bomb');
+                bomb.setBounce(1);
+                bomb.setCollideWorldBounds(true);
+                bomb.setVelocity(Phaser.Math.Between(-100, 400), 700);
+                bomb.allowGravity = false;
+
+                var x = (player.x < 80) ? Phaser.Math.Between(300, 600) : Phaser.Math.Between(600, 900);
 
                 var bomb = bombs.create(x, 100, 'bomb');
                 bomb.setBounce(1);
@@ -260,7 +270,7 @@
         }
 
         function reload() {
-            document.addEventListener("keyup", function(event) {
+            document.addEventListener("keyup", function (event) {
                 if (event.keyCode === 13) {
                     location.reload();
 
