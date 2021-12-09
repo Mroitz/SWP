@@ -48,6 +48,7 @@
         var platforms;
         var lava;
         var lava2;
+        var jumppad;
         var cursors;
         var score = 0;
         var gameOver = false;
@@ -59,6 +60,7 @@
 
         function preload() {
             this.load.image('sky', 'assets/background.png');
+            this.load.image('sky2', 'assets/sky2.png');
             this.load.image('ground', 'assets/plattform.png');
             this.load.image('ground2', 'assets/platform2.png');
             this.load.image('star', 'assets/star.png');
@@ -68,6 +70,7 @@
             this.load.image('spikes', 'assets/spikes1.png');
             this.load.image('pressenter', 'assets/pressenter.png');
             this.load.image('gameover', 'assets/gameover.png');
+            this.load.image('jumppad', 'assets/jumppad.png');
             this.load.spritesheet('dude', 'assets/sans1.png', {
                 frameWidth: 38.5,
                 frameHeight: 50
@@ -76,32 +79,39 @@
 
         function create() {
             //  A simple background for our game
-            this.add.image(712, 340, 'sky').setScale(3);
-
+            this.add.image(307,455, 'sky').setScale(0.6);
+            this.add.image(921,455, 'sky').setScale(0.6);
+            this.add.image(1535,455, 'sky').setScale(0.6);
+            this.add.image(512,50, 'sky2').setScale(1);
+            this.add.image(1412,50, 'sky2').setScale(1);
 
             //  The platforms group contains the ground and the 2 ledges we can jump on
             platforms = this.physics.add.staticGroup();
             lava = this.physics.add.staticGroup();
             lava2 = this.physics.add.staticGroup();
+            jumppad = this.physics.add.staticGroup();
+            wolke = this.physics.add.staticGroup();
 
             //  Here we create the ground.
             //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-            platforms.create(-250, 587, 'ground').setScale(0.6).refreshBody();
-            platforms.create(700, 587, 'ground').setScale(0.6).refreshBody();
-            platforms.create(1700, 587, 'ground').setScale(0.6).refreshBody();
-            lava.create(768, 810, 'lava').setScale(1).refreshBody();
+            platforms.create(-250, 687, 'ground').setScale(0.6).refreshBody();
+            platforms.create(680, 687, 'ground').setScale(0.6).refreshBody();
+            platforms.create(1700, 687, 'ground').setScale(0.6).refreshBody();  
 
             //  Now let's create some ledges
-            platforms.create(600, 400, 'ground').setScale(0.3).refreshBody();
-            platforms.create(50, 250, 'ground').setScale(0.3).refreshBody();
-            platforms.create(750, 220, 'ground2').setScale(0.3).refreshBody();
-            platforms.create(1250, 320, 'ground').setScale(0.3).refreshBody();
-            platforms.create(1380, 150, 'ground2').setScale(0.3).refreshBody();
-            lava2.create(768, 870, 'lava2').setScale(2.3).refreshBody();
-            lava.create(658, 690, 'lava').setScale(1).refreshBody();
-            lava.create(1326, 690, 'lava').setScale(1).refreshBody();
-            lava.create(-10, 690, 'lava').setScale(1).refreshBody();
-            lava2.create(768, 532, 'spikes').setScale(1.5).refreshBody();
+            platforms.create(600, 500, 'ground').setScale(0.3).refreshBody();
+            platforms.create(50, 350, 'ground').setScale(0.3).refreshBody();
+            platforms.create(750, 300, 'ground2').setScale(0.3).refreshBody();
+            platforms.create(400, 170, 'ground2').setScale(0.3).refreshBody();
+            platforms.create(1250, 420, 'ground').setScale(0.3).refreshBody();
+            platforms.create(1380, 250, 'ground2').setScale(0.3).refreshBody();
+            //lava2.create(768, 870, 'lava2').setScale(2.3).refreshBody();
+            //lava.create(658, 690, 'lava').setScale(1).refreshBody();
+            //lava.create(1326, 690, 'lava').setScale(1).refreshBody();
+            //lava.create(-10, 690, 'lava').setScale(1).refreshBody();
+            lava2.create(700, 468, 'spikes').setScale(1.1).refreshBody();
+            jumppad.create(955, 633, 'jumppad').setScale(0.1).refreshBody();
+            
 
             // The player and its settings
             player = this.physics.add.sprite(100, 450, 'dude');
@@ -173,15 +183,17 @@
             //  Collide the player and the stars with the platforms
             this.physics.add.collider(player, platforms);
             this.physics.add.collider(stars, platforms);
+            this.physics.add.collider(stars, jumppad);
+            this.physics.add.collider(bombs, jumppad);
             this.physics.add.collider(bombs, platforms);
 
 
             //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
             this.physics.add.overlap(player, stars, collectStar, null, this);
-
             this.physics.add.collider(player, bombs, hitBomb, null, this);
             this.physics.add.collider(player, lava2, hitLava2, null, this);
-            this.physics.add.collider(bombs, lava2, hitLava, null, this);
+            //this.physics.add.collider(bombs, lava2, hitLava, null, this);
+            this.physics.add.collider(player, jumppad, hitjumppad, null, this);
         }
 
         function update() {
@@ -189,7 +201,7 @@
                 reload();
                 this.add.image(780, 375, 'gameover').setScale(3);
                 this.add.image(780, 670, 'pressenter').setScale(0.5);
-
+                
             }
 
             if (cursors.left.isDown) {
@@ -279,6 +291,10 @@
 
 
 
+        }
+
+        function hitjumppad(){
+            player.setVelocityY(-750);
         }
     </script>
 
