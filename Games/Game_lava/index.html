@@ -25,7 +25,7 @@
         var config = {
             type: Phaser.AUTO,
             width: 1536,
-            height: 765,
+            height: 900,
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -47,7 +47,7 @@
         var bombs;
         var platforms;
         var lava;
-        var lava2;
+        var spikes;
         var jumppad;
         var cursors;
         var score = 0;
@@ -65,8 +65,6 @@
             this.load.image('ground2', 'assets/platform2.png');
             this.load.image('star', 'assets/star.png');
             this.load.image('bomb', 'assets/bomb.png');
-            this.load.image('lava', 'assets/lava.png');
-            this.load.image('lava2', 'assets/lava.png');
             this.load.image('spikes', 'assets/spikes1.png');
             this.load.image('pressenter', 'assets/pressenter.png');
             this.load.image('gameover', 'assets/gameover.png');
@@ -79,16 +77,15 @@
 
         function create() {
             //  A simple background for our game
-            this.add.image(307,455, 'sky').setScale(0.6);
-            this.add.image(921,455, 'sky').setScale(0.6);
-            this.add.image(1535,455, 'sky').setScale(0.6);
-            this.add.image(512,50, 'sky2').setScale(1);
-            this.add.image(1412,50, 'sky2').setScale(1);
+            this.add.image(307, 455, 'sky').setScale(0.6);
+            this.add.image(921, 455, 'sky').setScale(0.6);
+            this.add.image(1535, 455, 'sky').setScale(0.6);
+            this.add.image(512, 50, 'sky2').setScale(1);
+            this.add.image(1412, 50, 'sky2').setScale(1);
 
             //  The platforms group contains the ground and the 2 ledges we can jump on
             platforms = this.physics.add.staticGroup();
-            lava = this.physics.add.staticGroup();
-            lava2 = this.physics.add.staticGroup();
+            spikes = this.physics.add.staticGroup();
             jumppad = this.physics.add.staticGroup();
             wolke = this.physics.add.staticGroup();
 
@@ -96,7 +93,7 @@
             //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
             platforms.create(-250, 687, 'ground').setScale(0.6).refreshBody();
             platforms.create(680, 687, 'ground').setScale(0.6).refreshBody();
-            platforms.create(1700, 687, 'ground').setScale(0.6).refreshBody();  
+            platforms.create(1700, 687, 'ground').setScale(0.6).refreshBody();
 
             //  Now let's create some ledges
             platforms.create(600, 500, 'ground').setScale(0.3).refreshBody();
@@ -109,9 +106,17 @@
             //lava.create(658, 690, 'lava').setScale(1).refreshBody();
             //lava.create(1326, 690, 'lava').setScale(1).refreshBody();
             //lava.create(-10, 690, 'lava').setScale(1).refreshBody();
-            lava2.create(700, 468, 'spikes').setScale(1.1).refreshBody();
+            spikes.create(700, 468, 'spikes').setScale(1.1).refreshBody();
+            spikes.create(1350, 388 , 'spikes').setScale(1.1).refreshBody();
+            spikes.create(1500, 636, 'spikes').setScale(1.2).refreshBody();
+            spikes.create(150, 915, 'spikes').setScale(3).refreshBody();
+            spikes.create(300, 915, 'spikes').setScale(3).refreshBody();
+            spikes.create(1250, 915, 'spikes').setScale(3).refreshBody();
+            spikes.create(1100, 915, 'spikes').setScale(3).refreshBody();
+            spikes.create(950, 915, 'spikes').setScale(3).refreshBody();
+            spikes.create(1400, 915, 'spikes').setScale(3).refreshBody();
             jumppad.create(955, 633, 'jumppad').setScale(0.1).refreshBody();
-            
+
 
             // The player and its settings
             player = this.physics.add.sprite(100, 450, 'dude');
@@ -191,9 +196,44 @@
             //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
             this.physics.add.overlap(player, stars, collectStar, null, this);
             this.physics.add.collider(player, bombs, hitBomb, null, this);
-            this.physics.add.collider(player, lava2, hitLava2, null, this);
+            this.physics.add.collider(player, spikes, hitspikes, null, this);
             //this.physics.add.collider(bombs, lava2, hitLava, null, this);
             this.physics.add.collider(player, jumppad, hitjumppad, null, this);
+        }
+        function hitBomb(player, bomb) {
+            this.physics.pause();
+
+            player.setTint(0xff0000);
+
+            player.anims.play('turn');
+
+            gameOver = true;
+        }
+
+        function hitspikes(player, spikes) {
+            this.physics.pause();
+
+            player.setTint(0xff0000);
+
+            player.anims.play('turn');
+
+            gameOver = true;
+        }
+
+        function reload() {
+            document.addEventListener("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    location.reload();
+
+                }
+            });
+
+
+
+        }
+
+        function hitjumppad() {
+            player.setVelocityY(-750);
         }
 
         function update() {
@@ -201,7 +241,6 @@
                 reload();
                 this.add.image(780, 375, 'gameover').setScale(3);
                 this.add.image(780, 670, 'pressenter').setScale(0.5);
-                
             }
 
             if (cursors.left.isDown) {
@@ -256,46 +295,7 @@
             }
         }
 
-        function hitBomb(player, bomb) {
-            this.physics.pause();
 
-            player.setTint(0xff0000);
-
-            player.anims.play('turn');
-
-            gameOver = true;
-        }
-
-        function hitLava(bomb, lava2) {
-            bomb.disableBody(true, true);
-
-        }
-
-        function hitLava2(player, lava2) {
-            this.physics.pause();
-
-            player.setTint(0xff0000);
-
-            player.anims.play('turn');
-
-            gameOver = true;
-        }
-
-        function reload() {
-            document.addEventListener("keyup", function (event) {
-                if (event.keyCode === 13) {
-                    location.reload();
-
-                }
-            });
-
-
-
-        }
-
-        function hitjumppad(){
-            player.setVelocityY(-750);
-        }
     </script>
 
 </body>
